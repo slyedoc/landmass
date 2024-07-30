@@ -134,6 +134,7 @@ fn setup(
   let mesh_1: Handle<Mesh> = asset_server.load("nav_mesh.glb#Mesh0/Primitive0");
   let nav_mesh_1 = nav_meshes.reserve_handle();
   commands.spawn((
+    Name::new("Island 1"),
     MaterialMesh2dBundle {
       mesh: Mesh2dHandle(mesh_1.clone()),
       material: materials.add(ColorMaterial {

@@ -37,7 +37,7 @@ pub type Agent2dBundle = AgentBundle<TwoD>;
 pub type Agent3dBundle = AgentBundle<ThreeD>;
 
 /// An agent. See [`crate::AgentBundle`] for required related components.
-#[derive(Component)]
+#[derive(Component, Debug)]
 pub struct Agent {
   /// The radius of the agent.
   pub radius: f32,

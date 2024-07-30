@@ -3,15 +3,11 @@
 use std::{collections::HashMap, sync::Arc};
 
 use bevy::{
-  app::{Plugin, Update},
-  asset::{Assets, Handle},
-  log::warn,
-  math::{UVec2, Vec3},
-  prelude::{
+  app::{Plugin, Update}, asset::{Assets, Handle}, core::Name, log::warn, math::{UVec2, Vec3}, prelude::{
     App, Commands, Component, Deref, DerefMut, Entity, Event, EventReader,
     EventWriter, IntoSystemConfigs, Query, Res, ResMut, Resource,
     TransformBundle, With,
-  },
+  }
 };
 use bevy_landmass::{
   ArchipelagoRef3d, Island, LandmassSystemSet, NavigationMesh3d,
@@ -133,6 +129,7 @@ impl UpdateTile {
           let archipelago = archipelago.single();
           let entity = commands
             .spawn((
+              Name::new(format!("Island {}x{}", tile.x, tile.y)),
               TransformBundle::default(),
               Island,
               ArchipelagoRef3d::new(archipelago),
