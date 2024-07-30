@@ -12,24 +12,39 @@ repository = "https://github.com/andriyDev/landmass"
 
 categories = ["game-development"]
 keywords = ["navigation", "oxidized", "navmesh", "landmass", "bevy"]
-
 exclude = ["/assets"]
 
 [lints.clippy]
 type_complexity = "allow"
+
+[features]
+default = []
+
+avian = [
+  "oxidized_navigation/avian",
+  "oxidized_navigation/parry_015",
+]
+rapier = ["oxidized_navigation/rapier", "oxidized_navigation/parry_016"]
 
 [dependencies]
 bevy = { version = "0.14.0", default-features = false, features = [
   "bevy_asset",
 ] }
 bevy_landmass = { path = "../bevy_landmass", version = "0.8.0-dev" }
-oxidized_navigation = "0.11.0"
+#oxidized_navigation = { git = "https://github.com/slyedoc/oxidized_navigation", branch = "avian" }
+oxidized_navigation = { path = "../../../../f/oxidized_navigation", default-features = false }
 
 [dev-dependencies]
 bevy = "0.14.0"
-bevy_rapier3d = "0.27.0"
-oxidized_navigation = { version = "0.11.0", features = ["rapier"] }
+avian3d = { version = "0.1" }
+bevy_rapier3d = { version = "0.27.0" }
 
 [[example]]
-name = "landmass_oxidized_navigation_example"
-path = "example/main.rs"
+name = "landmass_oxidized_navigation_rapier"
+path = "example/rapier.rs"
+required-features = ["rapier"]
+
+[[example]]
+name = "landmass_oxidized_navigation_avian"
+path = "example/avian.rs"
+required-features = ["avian"]

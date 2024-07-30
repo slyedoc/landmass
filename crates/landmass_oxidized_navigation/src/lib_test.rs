@@ -2,7 +2,11 @@ use std::{collections::HashMap, time::Duration};
 
 use bevy::prelude::*;
 use bevy_landmass::prelude::*;
+#[cfg(feature = "rapier")]
 use bevy_rapier3d::prelude::*;
+#[cfg(feature = "avian")]
+use avian3d::prelude::*;
+
 use oxidized_navigation::{
   ActiveGenerationTasks, NavMeshAffector, NavMeshSettings,
   OxidizedNavigationPlugin,
