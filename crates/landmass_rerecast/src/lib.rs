@@ -15,7 +15,7 @@ use bevy_ecs::{
     IntoScheduleConfigs, ScheduleLabel, SystemCondition, SystemSet,
     common_conditions::on_message,
   },
-  system::ResMut,
+  system::{Res, ResMut},
   world::DeferredWorld,
 };
 use bevy_landmass::{ArchipelagoRef3d, Island, LandmassSystems};
@@ -193,7 +193,7 @@ fn convert_changed_rerecast_meshes_to_landmass(
   mut rerecast_events: MessageReader<AssetEvent<bevy_rerecast::Navmesh>>,
   mut new_conversion_events: MessageReader<NewRerecastConversion>,
   mut mapping: ResMut<RerecastToLandmassIds>,
-  mut rerecast_meshes: ResMut<Assets<bevy_rerecast::Navmesh>>,
+  rerecast_meshes: Res<Assets<bevy_rerecast::Navmesh>>,
   mut landmass_meshes: ResMut<Assets<bevy_landmass::NavMesh3d>>,
 ) {
   let mut changed_rerecast_ids = HashSet::new();
@@ -217,7 +217,9 @@ fn convert_changed_rerecast_meshes_to_landmass(
       continue;
     };
 
-    let Some(rerecast_mesh) = rerecast_meshes.remove(rerecast_id) else {
+    // TODO: We keep the rerecast mesh around for debug gizmos. We could remove
+    // it after conversion to save memory if gizmos aren't needed.
+    let Some(rerecast_mesh) = rerecast_meshes.get(rerecast_id) else {
       // We always send an event the first time the conversion is created in
       // case this asset exists. But it is also perfectly valid for this asset
       // to not exist and still be loading.
