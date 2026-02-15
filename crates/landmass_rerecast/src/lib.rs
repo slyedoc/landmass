@@ -86,7 +86,7 @@ pub struct Island3dBundle {
 /// A replacement for [`bevy_landmass::NavMeshHandle3d`] that stores a
 /// [`bevy_rerecast::Navmesh`] handle.
 #[derive(Component, Clone, Debug)]
-#[component(immutable, on_insert=on_insert_rerecast_navmesh, on_replace=on_replace_rerecast_navmesh)]
+#[component(immutable, on_insert=on_insert_rerecast_navmesh, on_discard=on_replace_rerecast_navmesh)]
 pub struct NavMeshHandle3d(pub Handle<bevy_rerecast::Navmesh>);
 
 // Due to https://github.com/rust-lang/rust/issues/73191, users could be using
