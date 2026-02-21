@@ -428,11 +428,6 @@ pub type NavMesh3d = NavMesh<ThreeD>;
 #[derive(Component, Clone, Debug)]
 pub struct NavMeshHandle<CS: CoordinateSystem>(pub Handle<NavMesh<CS>>);
 
-impl<CS: CoordinateSystem> Default for NavMeshHandle<CS> {
-  fn default() -> Self {
-    Self(Default::default())
-  }
-}
 
 pub type NavMeshHandle2d = NavMeshHandle<TwoD>;
 pub type NavMeshHandle3d = NavMeshHandle<ThreeD>;
