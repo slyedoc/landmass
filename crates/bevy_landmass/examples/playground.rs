@@ -2,7 +2,7 @@ use std::{f32::consts::TAU, sync::Arc};
 
 use bevy::{
   color::palettes::css, input::common_conditions::input_just_pressed,
-  prelude::*, scene::SceneInstanceReady,
+  prelude::*, world_serialization::WorldInstanceReady,
 };
 use bevy_landmass::{
   Agent3d, AnimationLink, AnimationLinkReachedDistance, FromAgentRadius,
@@ -105,9 +105,9 @@ fn setup(
   let archipelago_entity = commands.spawn(archipelago).id();
 
   commands
-    .spawn(SceneRoot(asset_server.load("playground.glb#Scene1")))
+    .spawn(WorldAssetRoot(asset_server.load("playground.glb#Scene1")))
     .observe(
-      move |event: On<SceneInstanceReady>,
+      move |event: On<WorldInstanceReady>,
             children: Query<&Children>,
             name: Query<&Name>,
             transforms: TransformHelper,
