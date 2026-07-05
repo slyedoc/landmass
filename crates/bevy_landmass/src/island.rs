@@ -10,6 +10,7 @@ use bevy_ecs::{
 };
 use bevy_platform::collections::{HashMap, HashSet};
 use bevy_transform::{components::Transform, helper::TransformHelper};
+use bevy_math::ToRender;
 
 use crate::{
   Archipelago, ArchipelagoRef, NavMesh, NavMeshHandle,
@@ -71,8 +72,8 @@ pub(crate) fn sync_islands_to_archipelago<CS: CoordinateSystem>(
 
     let island_transform = island_transform.compute_transform();
     let landmass_transform = landmass::Transform {
-      translation: CS::from_bevy_position(island_transform.translation),
-      rotation: CS::from_bevy_rotation(&island_transform.rotation),
+      translation: CS::from_bevy_position(island_transform.translation.to_render()),
+      rotation: CS::from_bevy_rotation(&island_transform.rotation.to_render()),
     };
 
     match archipelago.get_island_mut(island_entity) {

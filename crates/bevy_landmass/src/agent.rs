@@ -9,6 +9,7 @@ use bevy_ecs::{
 use bevy_log::warn_once;
 use bevy_platform::collections::HashMap;
 use bevy_transform::{components::Transform, helper::TransformHelper};
+use bevy_math::ToRender;
 use landmass::AnimationLinkId;
 
 use crate::{
@@ -151,7 +152,7 @@ impl<CS: CoordinateSystem> AgentTarget<CS> {
       &Self::Entity(entity) => transform_helper
         .compute_global_transform(entity)
         .ok()
-        .map(|transform| CS::from_bevy_position(transform.translation())),
+        .map(|transform| CS::from_bevy_position(transform.translation().to_render())),
       _ => None,
     }
   }
@@ -339,7 +340,8 @@ pub(crate) fn sync_agent_input_state<CS: CoordinateSystem>(
     let landmass_agent = archipelago
       .get_agent_mut(agent_entity)
       .expect("this agent is in the archipelago");
-    landmass_agent.position = CS::from_bevy_position(transform.translation());
+    landmass_agent.position =
+      CS::from_bevy_position(transform.translation().to_render());
     if let Some(Velocity { velocity }) = velocity {
       landmass_agent.velocity = velocity.clone();
     }

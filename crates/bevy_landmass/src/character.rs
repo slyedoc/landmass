@@ -6,6 +6,7 @@ use bevy_ecs::{
 };
 use bevy_platform::collections::HashMap;
 use bevy_transform::{components::Transform, helper::TransformHelper};
+use bevy_math::ToRender;
 
 use crate::{
   Archipelago, ArchipelagoRef,
@@ -144,7 +145,7 @@ pub(crate) fn sync_character_state<CS: CoordinateSystem>(
       .get_character_mut(character_entity)
       .expect("the characters is in the archipelago");
     landmass_character.position =
-      CS::from_bevy_position(transform.translation());
+      CS::from_bevy_position(transform.translation().to_render());
     landmass_character.velocity = if let Some(Velocity { velocity }) = velocity
     {
       velocity.clone()

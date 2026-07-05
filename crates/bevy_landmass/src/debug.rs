@@ -18,6 +18,7 @@ use bevy_gizmos::{
   gizmos::Gizmos,
 };
 use bevy_math::{Isometry3d, Quat};
+use bevy_math::ToPrecision;
 use bevy_reflect::Reflect;
 use bevy_transform::components::Transform;
 
@@ -485,12 +486,11 @@ impl<CS: CoordinateSystem> DebugDrawer<CS> for GizmoDrawer<'_, '_, '_, CS> {
       self.cube(
         Transform::default()
           .looking_to(line[1] - line[0], bevy_math::Vec3::new(0.0, 1.0, 0.0))
-          .with_translation((line[0] + line[1]) * 0.5)
-          .with_scale(bevy_math::Vec3::new(
-            0.01,
-            0.01,
-            line[0].distance(line[1]),
-          )),
+          .with_translation(((line[0] + line[1]) * 0.5).to_precision())
+          .with_scale(
+            bevy_math::Vec3::new(0.01, 0.01, line[0].distance(line[1]))
+              .to_precision(),
+          ),
         color,
       );
       return;
