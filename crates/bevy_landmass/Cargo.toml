@@ -1,6 +1,6 @@
 [package]
 name = "bevy_landmass"
-version = "0.11.0"
+version = "0.12.0"
 edition = "2024"
 
 description = "A plugin for Bevy to handle navigation of AI characters."
@@ -36,7 +36,8 @@ bevy_transform = { git = "https://github.com/bevyengine/bevy", branch = "main", 
 
 [dev-dependencies]
 bevy = { git = "https://github.com/bevyengine/bevy", branch = "main" }
-googletest = "0.14.2"
+# Pin to 0.14.2 due to regression: https://github.com/google/googletest-rust/issues/823.
+googletest = "=0.14.2"
 
 [features]
 default = ["mesh-utils"]

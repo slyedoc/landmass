@@ -85,7 +85,7 @@ fn setup(
   ));
   commands.spawn((
     Transform::from_xyz(10.0, 10.0, -10.0).looking_at(Vec3::ZERO, Vec3::Y),
-    DirectionalLight { shadows_enabled: true, ..Default::default() },
+    DirectionalLight { shadow_maps_enabled: true, ..Default::default() },
   ));
 
   let message = "LMB - Spawn agent\nRMB - Change target point\nA/D - Look left/right\nF12 - Toggle debug view";

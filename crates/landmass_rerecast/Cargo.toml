@@ -14,7 +14,7 @@ categories = ["game-development"]
 keywords = ["navigation", "system", "pathfinding"]
 
 [dependencies]
-bevy_landmass = { version = "0.11", path = "../bevy_landmass", default-features = false }
+bevy_landmass = { version = "0.12", path = "../bevy_landmass", default-features = false }
 
 bevy_app = { git = "https://github.com/bevyengine/bevy", branch = "main", default-features = false }
 bevy_asset = { git = "https://github.com/bevyengine/bevy", branch = "main", default-features = false }
@@ -27,7 +27,7 @@ bevy_rerecast = { git = "https://github.com/slyedoc/rerecast", branch = "bevy-ma
 
 [dev-dependencies]
 bevy = { git = "https://github.com/bevyengine/bevy", branch = "main" }
-googletest = "0.14.2"
-bevy_rerecast = { git = "https://github.com/slyedoc/rerecast", branch = "bevy-main", version = "0.3", default-features = false, features = [
+googletest = "=0.14.2"
+bevy_rerecast = { git = "https://github.com/slyedoc/rerecast", branch = "bevy-main", default-features = false, features = [
     "bevy_mesh",
 ] }
